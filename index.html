@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Bolsa de Extensão - Inovação, Tecnologia e Impacto Social</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #050816;
+      --bg-alt: #0b1020;
+      --text: #f5f5f5;
+      --muted: #b3b8d0;
+      --primary: #2563eb;   /* azul destaque projeto 1 [web:10] */
+      --secondary: #f97316; /* laranja destaque projeto 2 [web:10] */
+      --accent: #a855f7;    /* roxo para detalhes [web:10] */
+      --card: #111827;
+      --border: #1f2937;
+      --shadow-soft: 0 18px 40px rgba(0,0,0,0.55);
+      --radius-lg: 18px;
+      --radius-pill: 999px;
+      --transition-fast: 0.2s ease-out;
+      --max-width: 1120px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top left, #111827 0, #020617 40%, #000 100%);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 4rem;
+    }
+
+    header {
+      padding: 1.5rem 1.5rem 0;
+    }
+
+    .badge-top {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      font-size: .75rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      box-shadow: 0 0 10px rgba(59,130,246,.7);
+    }
+
+    .hero {
+      padding-top: 2rem;
+      padding-bottom: 3rem;
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.4fr);
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    .hero-text h1 {
+      font-size: clamp(2.5rem, 3.4vw + 1rem, 3.6rem);
+      line-height: 1.1;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-text h1 span {
+      background: linear-gradient(135deg, #38bdf8, #6366f1, #a855f7);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 40rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-highlight {
+      font-size: .98rem;
+      color: #e5e7eb;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+
+    .hero-highlight strong {
+      color: #fbbf24;
+      font-weight: 600;
+    }
+
+    .hero-highlight span {
+      display: inline-flex;
+      padding: .15rem .55rem;
+      border-radius: 999px;
+      background: rgba(37,99,235,0.2);
+      border: 1px solid rgba(129,140,248,0.45);
+      font-size: .75rem;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: #c7d2fe;
+    }
+
+    .hero-card {
+      background: radial-gradient(circle at top, #1d2538 0, #020617 60%);
+      border-radius: 28px;
+      padding: 1.4rem 1.5rem;
+      border: 1px solid rgba(148,163,184,0.25);
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .hero-orbit {
+      position: absolute;
+      inset: -30%;
+      opacity: .22;
+      background:
+        radial-gradient(circle at 10% 0%, #38bdf8 0, transparent 55%),
+        radial-gradient(circle at 90% 0%, #a855f7 0, transparent 55%),
+        radial-gradient(circle at 50% 100%, #f97316 0, transparent 60%);
+      mix-blend-mode: screen;
+      z-index: -1;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      font-size: .75rem;
+      padding: .25rem .8rem;
+      border-radius: var(--radius-pill);
+      background: rgba(15,23,42,0.8);
+      border: 1px solid rgba(148,163,184,0.45);
+      backdrop-filter: blur(10px);
+      color: #e5e7eb;
+      margin-bottom: .9rem;
+    }
+
+    .hero-tag-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 10px rgba(34,197,94,0.8);
+    }
+
+    .hero-card h2 {
+      font-size: 1.3rem;
+      margin-bottom: .6rem;
+    }
+
+    .hero-pill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .45rem;
+      margin-bottom: 1.1rem;
+    }
+
+    .pill {
+      font-size: .7rem;
+      text-transform: uppercase;
+      letter-spacing: .09em;
+      padding: .25rem .75rem;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.85);
+      border: 1px solid rgba(148,163,184,0.5);
+      color: #e5e7eb;
+    }
+
+    .hero-card p {
+      font-size: .9rem;
+      color: #e5e7eb;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .75rem;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: .5rem;
+      padding: .8rem 1.6rem;
+      border-radius: var(--radius-pill);
+      border: none;
+      cursor: pointer;
+      font-size: .95rem;
+      font-weight: 600;
+      background: linear-gradient(135deg, #f97316, #ec4899, #6366f1);
+      color: #f9fafb;
+      box-shadow: 0 12px 30px rgba(236,72,153,0.45);
+      transform: translateY(0);
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), filter var(--transition-fast);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px) scale(1.01);
+      box-shadow: 0 18px 45px rgba(236,72,153,0.65);
+      filter: brightness(1.04);
+    }
+
+    .btn-primary:active {
+      transform: translateY(0);
+      box-shadow: 0 9px 22px rgba(15,23,42,0.8);
+    }
+
+    .btn-primary span.icon {
+      width: 16px;
+      height: 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(248,250,252,0.7);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .6rem;
+    }
+
+    .hero-deadline {
+      font-size: .8rem;
+      color: var(--muted);
+    }
+
+    .hero-deadline strong {
+      color: #facc15;
+      font-weight: 600;
+    }
+
+    .sections {
+      background: linear-gradient(to bottom, var(--bg-alt), #020617);
+      border-radius: 32px 32px 0 0;
+      border-top: 1px solid rgba(148,163,184,0.3);
+      padding: 2.5rem 1.5rem 3.5rem;
+      margin-top: -1.5rem;
+      box-shadow: 0 -10px 40px rgba(0,0,0,0.7);
+    }
+
+    .sections-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: center;
+      margin-bottom: 1.8rem;
+    }
+
+    .sections-header h3 {
+      font-size: 1.15rem;
+      color: #e5e7eb;
+    }
+
+    .legend {
+      display: flex;
+      gap: .8rem;
+      flex-wrap: wrap;
+      font-size: .8rem;
+      color: var(--muted);
+    }
+
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: .35rem;
+    }
+
+    .legend-dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 4px;
+    }
+
+    .legend-dot.blue {
+      background: linear-gradient(135deg, #1d4ed8, #38bdf8);
+    }
+
+    .legend-dot.orange {
+      background: linear-gradient(135deg, #f97316, #fb923c);
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 1.8rem;
+      margin-bottom: 2.4rem;
+    }
+
+    .card-project {
+      background: radial-gradient(circle at top, #020617 0, #020617 35%, #020617 100%);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      padding: 1.4rem 1.35rem 1.5rem;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.7);
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast), background var(--transition-fast);
+    }
+
+    .card-project::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      opacity: 0;
+      transition: opacity 0.4s ease-out;
+      z-index: -1;
+    }
+
+    .card-project.project-1 {
+      border-color: rgba(59,130,246,0.6);
+      background: radial-gradient(circle at top left, rgba(59,130,246,0.25), transparent 60%), #020617;
+    }
+
+    .card-project.project-1::before {
+      background:
+        radial-gradient(circle at 0 0, rgba(56,189,248,0.6), transparent 55%),
+        radial-gradient(circle at 100% 0, rgba(56,189,248,0.35), transparent 65%);
+    }
+
+    .card-project.project-2 {
+      border-color: rgba(249,115,22,0.55);
+      background: radial-gradient(circle at top right, rgba(249,115,22,0.28), transparent 60%), #020617;
+    }
+
+    .card-project.project-2::before {
+      background:
+        radial-gradient(circle at 0 0, rgba(248,250,252,0.04), transparent 55%),
+        radial-gradient(circle at 100% 0, rgba(249,115,22,0.6), transparent 60%);
+    }
+
+    .card-project:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 22px 48px rgba(0,0,0,0.85);
+    }
+
+    .card-project:hover::before {
+      opacity: 1;
+    }
+
+    .project-label {
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      font-size: .75rem;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+      color: #e5e7eb;
+      margin-bottom: .6rem;
+    }
+
+    .project-label span.tag {
+      padding: .2rem .6rem;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(148,163,184,0.6);
+      background: rgba(15,23,42,0.85);
+    }
+
+    .project-title {
+      font-size: 1.1rem;
+      margin-bottom: .75rem;
+    }
+
+    .project-chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .35rem;
+      margin-bottom: .75rem;
+    }
+
+    .chip {
+      font-size: .7rem;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      padding: .18rem .55rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.6);
+      color: #e5e7eb;
+      background: rgba(15,23,42,0.9);
+    }
+
+    .chip.blue {
+      border-color: rgba(37,99,235,0.9);
+      background: rgba(37,99,235,0.25);
+    }
+
+    .chip.orange {
+      border-color: rgba(249,115,22,0.9);
+      background: rgba(249,115,22,0.23);
+    }
+
+    .project-section-title {
+      font-size: .8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: var(--muted);
+      margin-top: .4rem;
+      margin-bottom: .15rem;
+    }
+
+    .project-section-body {
+      font-size: .9rem;
+      color: #e5e7eb;
+    }
+
+    .project-section-body + .project-section-title {
+      margin-top: .8rem;
+    }
+
+    .project-benefits {
+      margin-top: .6rem;
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .project-benefits li {
+      font-size: .9rem;
+      color: #e5e7eb;
+      display: flex;
+      align-items: flex-start;
+      gap: .45rem;
+      margin-top: .4rem;
+    }
+
+    .project-benefits li::before {
+      content: "▹";
+      font-size: .8rem;
+      margin-top: .08rem;
+      color: #38bdf8;
+    }
+
+    .project-2 .project-benefits li::before {
+      color: #fb923c;
+    }
+
+    .cta-final {
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(148,163,184,0.35);
+      padding: 1.4rem 1.5rem;
+      background: radial-gradient(circle at top, rgba(129,140,248,0.25), transparent 60%), #020617;
+      box-shadow: var(--shadow-soft);
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .cta-text h3 {
+      font-size: 1.15rem;
+      margin-bottom: .5rem;
+    }
+
+    .cta-text p {
+      font-size: .9rem;
+      color: #e5e7eb;
+      margin-bottom: .6rem;
+    }
+
+    .cta-pill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .4rem;
+      margin-top: .3rem;
+    }
+
+    .cta-pill {
+      font-size: .75rem;
+      padding: .25rem .7rem;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(148,163,184,0.65);
+      color: #e5e7eb;
+    }
+
+    .cta-side {
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+      align-items: flex-start;
+    }
+
+    .cta-deadline {
+      font-size: .85rem;
+      color: #e5e7eb;
+    }
+
+    .cta-deadline strong {
+      color: #facc15;
+      font-weight: 600;
+    }
+
+    .cta-contact {
+      font-size: .8rem;
+      color: var(--muted);
+    }
+
+    .cta-contact strong {
+      color: #e5e7eb;
+      font-weight: 600;
+    }
+
+    footer {
+      font-size: .75rem;
+      color: var(--muted);
+      text-align: center;
+      padding: 1.4rem 1.5rem 2rem;
+    }
+
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .hero-card {
+        order: -1;
+      }
+
+      .projects-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .cta-final {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .container {
+        padding-inline: 1.25rem;
+      }
+
+      header {
+        padding-inline: 1.25rem;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .hero {
+        padding-top: 1.5rem;
+        padding-bottom: 2.3rem;
+      }
+
+      .sections {
+        border-radius: 24px 24px 0 0;
+        padding-inline: 1.1rem;
+      }
+
+      .hero-text h1 {
+        font-size: 2.1rem;
+      }
+
+      .btn-primary {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="badge-top">
+        <span class="badge-dot"></span>
+        BOLSA DE EXTENSÃO · 2025
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="hero">
+        <div class="hero-text">
+          <h1>
+            Oportunidade de Bolsa de Extensão:
+            <span>Inovação, Tecnologia e Impacto Social no Campus!</span>
+          </h1>
+          <p class="hero-subtitle">
+            Você quer ir além da sala de aula? Estamos selecionando estudantes bolsistas para dois projetos de extensão inovadores que unem tecnologia de ponta (Inteligência Artificial e Desenvolvimento de Jogos) a propósitos reais.
+          </p>
+          <p class="hero-highlight">
+            <strong>Venha fazer parte</strong> da equipe que vai transformar a experiência no nosso campus!
+            <span>Vagas limitadas</span>
+          </p>
+        </div>
+
+        <aside class="hero-card" aria-label="Resumo e chamada para inscrição">
+          <div class="hero-orbit" aria-hidden="true"></div>
+
+          <div class="hero-tag">
+            <span class="hero-tag-dot"></span>
+            Seleção aberta · Projeto de Extensão
+          </div>
+
+          <h2>2 trilhas para você escolher</h2>
+          <div class="hero-pill-list">
+            <span class="pill">IA &amp; Visão Computacional</span>
+            <span class="pill">Jogos Digitais 2D</span>
+            <span class="pill">Impacto Social</span>
+            <span class="pill">Trabalho em Equipe</span>
+          </div>
+          <p>
+            Experiência prática em tecnologia, solução de problemas reais do campus e um projeto que valoriza o seu currículo desde o início do curso.
+          </p>
+
+          <div class="hero-cta-row">
+            <!-- SUBSTITUA O href PELO LINK DO SEU GOOGLE FORMS -->
+            <a href="https://seu-link-do-forms-aqui" class="btn-primary">
+              <span class="icon">→</span>
+              QUERO ME INSCREVER
+            </a>
+            <span class="hero-deadline">
+              <strong>Prazo:</strong> [Insira a Data Aqui]
+            </span>
+          </div>
+        </aside>
+      </section>
+
+      <section class="sections">
+        <div class="sections-header">
+          <h3>Escolha o projeto que combina com você</h3>
+          <div class="legend">
+            <div class="legend-item">
+              <span class="legend-dot blue"></span>
+              Projeto 1 · IA & Inclusão
+            </div>
+            <div class="legend-item">
+              <span class="legend-dot orange"></span>
+              Projeto 2 · Jogos & Criatividade
+            </div>
+          </div>
+        </div>
+
+        <div class="projects-grid">
+          <!-- PROJETO 1 -->
+          <article class="card-project project-1">
+            <div class="project-label">
+              <span class="tag">Projeto 1</span>
+              Campus Acessível (IA e Inclusão)
+            </div>
+            <h4 class="project-title">
+              Use IA para tornar o campus mais acessível para pessoas com deficiência visual
+            </h4>
+
+            <div class="project-chip-row">
+              <span class="chip blue">Google Teachable Machine</span>
+              <span class="chip blue">Visão Computacional</span>
+              <span class="chip">Aplicação Web</span>
+              <span class="chip">Guia Virtual</span>
+            </div>
+
+            <div class="project-section">
+              <p class="project-section-title">O Desafio</p>
+              <p class="project-section-body">
+                Como podemos usar a tecnologia para tornar nosso campus mais inclusivo para pessoas com deficiência visual?
+              </p>
+            </div>
+
+            <div class="project-section">
+              <p class="project-section-title">A Solução</p>
+              <p class="project-section-body">
+                Você vai ajudar a desenvolver uma aplicação web usando Inteligência Artificial e Visão Computacional. O sistema funcionará como um “guia virtual”: o celular reconhecerá o ambiente (biblioteca, laboratório, etc.) e falará o nome do local para o usuário.
+              </p>
+            </div>
+
+            <div class="project-section">
+              <p class="project-section-title">Por que se candidatar?</p>
+              <ul class="project-benefits">
+                <li>Aprenda na prática sobre Machine Learning e IA sem precisar de matemática complexa.</li>
+                <li>Desenvolva uma solução com impacto social direto e visível na vida das pessoas.</li>
+                <li>Trabalhe com tecnologias web modernas e boas práticas de desenvolvimento.</li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- PROJETO 2 -->
+          <article class="card-project project-2 project-2">
+            <div class="project-label">
+              <span class="tag">Projeto 2</span>
+              Game Campi Conectados (Jogos e Criatividade)
+            </div>
+            <h4 class="project-title">
+              Crie um jogo 2D para receber calouros de forma divertida e gamificada
+            </h4>
+
+            <div class="project-chip-row">
+              <span class="chip orange">GDevelop</span>
+              <span class="chip orange">RPG / Aventura 2D</span>
+              <span class="chip">Onboarding de Calouros</span>
+              <span class="chip">Gamificação</span>
+            </div>
+
+            <div class="project-section">
+              <p class="project-section-title">O Desafio</p>
+              <p class="project-section-body">
+                Como podemos tornar a chegada dos novos alunos (calouros) mais divertida e menos confusa?
+              </p>
+            </div>
+
+            <div class="project-section">
+              <p class="project-section-title">A Solução</p>
+              <p class="project-section-body">
+                Vamos criar um jogo digital 2D (estilo RPG/Aventura) usando a engine GDevelop. O jogador explorará um campus virtual, cumprirá missões e aprenderá sobre a história, regras e locais importantes do instituto de forma gamificada.
+              </p>
+            </div>
+
+            <div class="project-section">
+              <p class="project-section-title">Por que se candidatar?</p>
+              <ul class="project-benefits">
+                <li>Aprenda o ciclo completo de desenvolvimento de jogos: roteiro, design de fases, arte e programação visual.</li>
+                <li>Use sua criatividade para resolver um problema real de comunicação com os calouros.</li>
+                <li>Crie um produto que poderá ser jogado por centenas de estudantes todos os anos.</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+
+        <!-- CHAMADA FINAL -->
+        <section class="cta-final">
+          <div class="cta-text">
+            <h3>Quem estamos procurando?</h3>
+            <p>
+              Não exigimos experiência prévia com IA ou criação de jogos. O mais importante é ter vontade de aprender, responsabilidade e disposição para colaborar em equipe.
+            </p>
+            <div class="cta-pill-list">
+              <span class="cta-pill">Alunos curiosos</span>
+              <span class="cta-pill">Compromisso com prazos</span>
+              <span class="cta-pill">Trabalho em equipe</span>
+              <span class="cta-pill">Matrícula ativa no curso técnico</span>
+            </div>
+          </div>
+
+          <div class="cta-side">
+            <!-- SUBSTITUA O href PELO LINK DO SEU GOOGLE FORMS -->
+            <a href="https://seu-link-do-forms-aqui" class="btn-primary">
+              <span class="icon">★</span>
+              QUERO ME INSCREVER
+            </a>
+            <p class="cta-deadline">
+              Prazo para inscrições: <strong>[Insira a Data Aqui]</strong>
+            </p>
+            <p class="cta-contact">
+              Dúvidas? Procure o <strong>Prof. Nelson</strong> ou envie um e-mail para:
+              <strong>[Seu E-mail]</strong>
+            </p>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <footer>
+      Esta página foi pensada para leitura rápida em celular. Toque no botão “Quero me inscrever” para acessar o formulário de inscrição.
+    </footer>
+  </div>
+</body>
+</html>
