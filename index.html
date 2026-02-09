@@ -10,9 +10,9 @@
       --bg-alt: #0b1020;
       --text: #f5f5f5;
       --muted: #b3b8d0;
-      --primary: #2563eb;   /* azul destaque projeto 1 [web:10] */
-      --secondary: #f97316; /* laranja destaque projeto 2 [web:10] */
-      --accent: #a855f7;    /* roxo para detalhes [web:10] */
+      --primary: #2563eb;
+      --secondary: #f97316;
+      --accent: #a855f7;
       --card: #111827;
       --border: #1f2937;
       --shadow-soft: 0 18px 40px rgba(0,0,0,0.55);
@@ -127,6 +127,9 @@
       text-transform: uppercase;
       letter-spacing: .08em;
       color: #c7d2fe;
+      /* Centraliza o texto do chip */
+      justify-content: center;
+      align-items: center;
     }
 
     .hero-card {
@@ -214,7 +217,7 @@
     .btn-primary {
       display: inline-flex;
       align-items: center;
-      justify-content: center;
+      justify-content: center; /* garante alinhamento horizontal central [web:34] */
       gap: .5rem;
       padding: .8rem 1.6rem;
       border-radius: var(--radius-pill);
@@ -227,6 +230,7 @@
       box-shadow: 0 12px 30px rgba(236,72,153,0.45);
       transform: translateY(0);
       transition: transform var(--transition-fast), box-shadow var(--transition-fast), filter var(--transition-fast);
+      text-align: center; /* fallback extra */
     }
 
     .btn-primary:hover {
@@ -592,7 +596,7 @@
     <header>
       <div class="badge-top">
         <span class="badge-dot"></span>
-        BOLSA DE EXTENSÃO · 2025
+        BOLSA DE EXTENSÃO · 2026
       </div>
     </header>
 
@@ -608,7 +612,7 @@
           </p>
           <p class="hero-highlight">
             <strong>Venha fazer parte</strong> da equipe que vai transformar a experiência no nosso campus!
-            <span>Vagas limitadas</span>
+            <span>VAGAS LIMITADAS</span>
           </p>
         </div>
 
@@ -638,7 +642,7 @@
               QUERO ME INSCREVER
             </a>
             <span class="hero-deadline">
-              <strong>Prazo:</strong> [Insira a Data Aqui]
+              <strong>Inscrições:</strong> 22/12/2025 a 30/01/2026
             </span>
           </div>
         </aside>
@@ -702,7 +706,7 @@
           </article>
 
           <!-- PROJETO 2 -->
-          <article class="card-project project-2 project-2">
+          <article class="card-project project-2">
             <div class="project-label">
               <span class="tag">Projeto 2</span>
               Game Campi Conectados (Jogos e Criatividade)
@@ -765,11 +769,11 @@
               QUERO ME INSCREVER
             </a>
             <p class="cta-deadline">
-              Prazo para inscrições: <strong>[Insira a Data Aqui]</strong>
+              Inscrições: <strong>22/12/2025 a 30/01/2026</strong>
             </p>
             <p class="cta-contact">
               Dúvidas? Procure o <strong>Prof. Nelson</strong> ou envie um e-mail para:
-              <strong>[Seu E-mail]</strong>
+              <strong>nelsonjr@ifsp.edu.br</strong>
             </p>
           </div>
         </section>
