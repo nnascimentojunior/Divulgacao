@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <title>Bolsa de Extensão - Inovação, Tecnologia e Impacto Social</title>
+  <title>Análise Comparativa Chunking para RAG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     :root {
@@ -10,9 +10,9 @@
       --bg-alt: #0b1020;
       --text: #f5f5f5;
       --muted: #b3b8d0;
-      --primary: #2563eb;
-      --secondary: #f97316;
-      --accent: #a855f7;
+      --primary: #10b981;   /* verde análise de dados */
+      --secondary: #f59e0b; /* amarelo machine learning */
+      --accent: #8b5cf6;    /* roxo IA avançada */
       --card: #111827;
       --border: #1f2937;
       --shadow-soft: 0 18px 40px rgba(0,0,0,0.55);
@@ -73,7 +73,7 @@
       height: 8px;
       border-radius: 999px;
       background: linear-gradient(135deg, var(--primary), var(--secondary));
-      box-shadow: 0 0 10px rgba(59,130,246,.7);
+      box-shadow: 0 0 10px rgba(16,185,129,.7);
     }
 
     .hero {
@@ -92,7 +92,7 @@
     }
 
     .hero-text h1 span {
-      background: linear-gradient(135deg, #38bdf8, #6366f1, #a855f7);
+      background: linear-gradient(135deg, #10b981, #f59e0b, #8b5cf6);
       -webkit-background-clip: text;
       color: transparent;
     }
@@ -117,19 +117,20 @@
       font-weight: 600;
     }
 
-    .hero-highlight span {
+    .hero-highlight span.hero-badge {
       display: inline-flex;
-      padding: .15rem .55rem;
+      justify-content: center;
+      align-items: center;
+      padding: .15rem .8rem;
+      min-width: 130px;
       border-radius: 999px;
-      background: rgba(37,99,235,0.2);
+      background: rgba(16,185,129,0.2);
       border: 1px solid rgba(129,140,248,0.45);
       font-size: .75rem;
       text-transform: uppercase;
       letter-spacing: .08em;
       color: #c7d2fe;
-      /* Centraliza o texto do chip */
-      justify-content: center;
-      align-items: center;
+      text-align: center;
     }
 
     .hero-card {
@@ -140,7 +141,6 @@
       box-shadow: var(--shadow-soft);
       position: relative;
       overflow: hidden;
-      isolation: isolate;
     }
 
     .hero-orbit {
@@ -148,9 +148,9 @@
       inset: -30%;
       opacity: .22;
       background:
-        radial-gradient(circle at 10% 0%, #38bdf8 0, transparent 55%),
-        radial-gradient(circle at 90% 0%, #a855f7 0, transparent 55%),
-        radial-gradient(circle at 50% 100%, #f97316 0, transparent 60%);
+        radial-gradient(circle at 10% 0%, #10b981 0, transparent 55%),
+        radial-gradient(circle at 90% 0%, #8b5cf6 0, transparent 55%),
+        radial-gradient(circle at 50% 100%, #f59e0b 0, transparent 60%);
       mix-blend-mode: screen;
       z-index: -1;
     }
@@ -217,7 +217,7 @@
     .btn-primary {
       display: inline-flex;
       align-items: center;
-      justify-content: center; /* garante alinhamento horizontal central [web:34] */
+      justify-content: center;
       gap: .5rem;
       padding: .8rem 1.6rem;
       border-radius: var(--radius-pill);
@@ -225,17 +225,16 @@
       cursor: pointer;
       font-size: .95rem;
       font-weight: 600;
-      background: linear-gradient(135deg, #f97316, #ec4899, #6366f1);
+      background: linear-gradient(135deg, #10b981, #f59e0b, #8b5cf6);
       color: #f9fafb;
-      box-shadow: 0 12px 30px rgba(236,72,153,0.45);
+      box-shadow: 0 12px 30px rgba(139,92,246,0.45);
       transform: translateY(0);
       transition: transform var(--transition-fast), box-shadow var(--transition-fast), filter var(--transition-fast);
-      text-align: center; /* fallback extra */
     }
 
     .btn-primary:hover {
       transform: translateY(-2px) scale(1.01);
-      box-shadow: 0 18px 45px rgba(236,72,153,0.65);
+      box-shadow: 0 18px 45px rgba(139,92,246,0.65);
       filter: brightness(1.04);
     }
 
@@ -272,202 +271,6 @@
       padding: 2.5rem 1.5rem 3.5rem;
       margin-top: -1.5rem;
       box-shadow: 0 -10px 40px rgba(0,0,0,0.7);
-    }
-
-    .sections-header {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 1rem;
-      align-items: center;
-      margin-bottom: 1.8rem;
-    }
-
-    .sections-header h3 {
-      font-size: 1.15rem;
-      color: #e5e7eb;
-    }
-
-    .legend {
-      display: flex;
-      gap: .8rem;
-      flex-wrap: wrap;
-      font-size: .8rem;
-      color: var(--muted);
-    }
-
-    .legend-item {
-      display: inline-flex;
-      align-items: center;
-      gap: .35rem;
-    }
-
-    .legend-dot {
-      width: 11px;
-      height: 11px;
-      border-radius: 4px;
-    }
-
-    .legend-dot.blue {
-      background: linear-gradient(135deg, #1d4ed8, #38bdf8);
-    }
-
-    .legend-dot.orange {
-      background: linear-gradient(135deg, #f97316, #fb923c);
-    }
-
-    .projects-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-      gap: 1.8rem;
-      margin-bottom: 2.4rem;
-    }
-
-    .card-project {
-      background: radial-gradient(circle at top, #020617 0, #020617 35%, #020617 100%);
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--border);
-      padding: 1.4rem 1.35rem 1.5rem;
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 16px 40px rgba(0,0,0,0.7);
-      transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast), background var(--transition-fast);
-    }
-
-    .card-project::before {
-      content: "";
-      position: absolute;
-      inset: -40%;
-      opacity: 0;
-      transition: opacity 0.4s ease-out;
-      z-index: -1;
-    }
-
-    .card-project.project-1 {
-      border-color: rgba(59,130,246,0.6);
-      background: radial-gradient(circle at top left, rgba(59,130,246,0.25), transparent 60%), #020617;
-    }
-
-    .card-project.project-1::before {
-      background:
-        radial-gradient(circle at 0 0, rgba(56,189,248,0.6), transparent 55%),
-        radial-gradient(circle at 100% 0, rgba(56,189,248,0.35), transparent 65%);
-    }
-
-    .card-project.project-2 {
-      border-color: rgba(249,115,22,0.55);
-      background: radial-gradient(circle at top right, rgba(249,115,22,0.28), transparent 60%), #020617;
-    }
-
-    .card-project.project-2::before {
-      background:
-        radial-gradient(circle at 0 0, rgba(248,250,252,0.04), transparent 55%),
-        radial-gradient(circle at 100% 0, rgba(249,115,22,0.6), transparent 60%);
-    }
-
-    .card-project:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 22px 48px rgba(0,0,0,0.85);
-    }
-
-    .card-project:hover::before {
-      opacity: 1;
-    }
-
-    .project-label {
-      display: inline-flex;
-      align-items: center;
-      gap: .45rem;
-      font-size: .75rem;
-      letter-spacing: .09em;
-      text-transform: uppercase;
-      color: #e5e7eb;
-      margin-bottom: .6rem;
-    }
-
-    .project-label span.tag {
-      padding: .2rem .6rem;
-      border-radius: var(--radius-pill);
-      border: 1px solid rgba(148,163,184,0.6);
-      background: rgba(15,23,42,0.85);
-    }
-
-    .project-title {
-      font-size: 1.1rem;
-      margin-bottom: .75rem;
-    }
-
-    .project-chip-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: .35rem;
-      margin-bottom: .75rem;
-    }
-
-    .chip {
-      font-size: .7rem;
-      text-transform: uppercase;
-      letter-spacing: .08em;
-      padding: .18rem .55rem;
-      border-radius: 999px;
-      border: 1px solid rgba(148,163,184,0.6);
-      color: #e5e7eb;
-      background: rgba(15,23,42,0.9);
-    }
-
-    .chip.blue {
-      border-color: rgba(37,99,235,0.9);
-      background: rgba(37,99,235,0.25);
-    }
-
-    .chip.orange {
-      border-color: rgba(249,115,22,0.9);
-      background: rgba(249,115,22,0.23);
-    }
-
-    .project-section-title {
-      font-size: .8rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: .12em;
-      color: var(--muted);
-      margin-top: .4rem;
-      margin-bottom: .15rem;
-    }
-
-    .project-section-body {
-      font-size: .9rem;
-      color: #e5e7eb;
-    }
-
-    .project-section-body + .project-section-title {
-      margin-top: .8rem;
-    }
-
-    .project-benefits {
-      margin-top: .6rem;
-      list-style: none;
-      padding-left: 0;
-    }
-
-    .project-benefits li {
-      font-size: .9rem;
-      color: #e5e7eb;
-      display: flex;
-      align-items: flex-start;
-      gap: .45rem;
-      margin-top: .4rem;
-    }
-
-    .project-benefits li::before {
-      content: "▹";
-      font-size: .8rem;
-      margin-top: .08rem;
-      color: #38bdf8;
-    }
-
-    .project-2 .project-benefits li::before {
-      color: #fb923c;
     }
 
     .cta-final {
@@ -552,10 +355,6 @@
         order: -1;
       }
 
-      .projects-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
-
       .cta-final {
         grid-template-columns: minmax(0, 1fr);
       }
@@ -575,11 +374,6 @@
         padding-bottom: 2.3rem;
       }
 
-      .sections {
-        border-radius: 24px 24px 0 0;
-        padding-inline: 1.1rem;
-      }
-
       .hero-text h1 {
         font-size: 2.1rem;
       }
@@ -596,7 +390,7 @@
     <header>
       <div class="badge-top">
         <span class="badge-dot"></span>
-        BOLSA DE EXTENSÃO · 2026
+        PESQUISA EM IA · 2026
       </div>
     </header>
 
@@ -604,176 +398,72 @@
       <section class="hero">
         <div class="hero-text">
           <h1>
-            Oportunidade de Bolsa de Extensão:
-            <span>Inovação, Tecnologia e Impacto Social no Campus!</span>
+            Análise Comparativa de Estratégias de 
+            <span>Divisão de Documentos (Chunking) para Otimização da Recuperação de Informação em Sistemas RAG</span>
           </h1>
           <p class="hero-subtitle">
-            Você quer ir além da sala de aula? Estamos selecionando estudantes bolsistas para dois projetos de extensão inovadores que unem tecnologia de ponta (Inteligência Artificial e Desenvolvimento de Jogos) a propósitos reais.
+            Modelos de Linguagem de Grande Porte (LLMs) revolucionaram o PLN, mas sofrem com alucinações e falta de acesso a conhecimento específico. A arquitetura RAG surge como solução, integrando bases externas aos LLMs.
           </p>
           <p class="hero-highlight">
-            <strong>Venha fazer parte</strong> da equipe que vai transformar a experiência no nosso campus!
-            <span>VAGAS LIMITADAS</span>
+            <strong>Investigação experimental</strong> que compara estratégias de chunking para sistemas RAG mais precisos!
+            <span class="hero-badge">Pesquisa Aberta</span>
           </p>
         </div>
 
-        <aside class="hero-card" aria-label="Resumo e chamada para inscrição">
-          <div class="hero-orbit" aria-hidden="true"></div>
-
+        <aside class="hero-card">
+          <div class="hero-orbit"></div>
           <div class="hero-tag">
             <span class="hero-tag-dot"></span>
-            Seleção aberta · Projeto de Extensão
+            Projeto de Pesquisa · Inteligência Artificial
           </div>
-
-          <h2>2 trilhas para você escolher</h2>
+          <h2>3 Estratégias Analisadas</h2>
           <div class="hero-pill-list">
-            <span class="pill">IA &amp; Visão Computacional</span>
-            <span class="pill">Jogos Digitais 2D</span>
-            <span class="pill">Impacto Social</span>
-            <span class="pill">Trabalho em Equipe</span>
+            <span class="pill">Chunking Fixo</span>
+            <span class="pill">Chunking Recursivo</span>
+            <span class="pill">Chunking Semântico</span>
+            <span class="pill">Pipeline RAG</span>
+            <span class="pill">LLMs</span>
           </div>
           <p>
-            Experiência prática em tecnologia, solução de problemas reais do campus e um projeto que valoriza o seu currículo desde o início do curso.
+            Estudo quantitativo que compara diferentes técnicas de divisão de documentos para otimizar a recuperação de informação em sistemas de Geração Aumentada por Recuperação.
           </p>
-
           <div class="hero-cta-row">
-            <!-- SUBSTITUA O href PELO LINK DO SEU GOOGLE FORMS -->
             <a href="https://seu-link-do-forms-aqui" class="btn-primary">
               <span class="icon">→</span>
-              QUERO ME INSCREVER
+              QUERO PARTICIPAR
             </a>
             <span class="hero-deadline">
-              <strong>Inscrições:</strong> 22/12/2025 a 30/01/2026
+              <strong>Período:</strong> 22/12/2025 a 30/01/2026
             </span>
           </div>
         </aside>
       </section>
 
       <section class="sections">
-        <div class="sections-header">
-          <h3>Escolha o projeto que combina com você</h3>
-          <div class="legend">
-            <div class="legend-item">
-              <span class="legend-dot blue"></span>
-              Projeto 1 · IA & Inclusão
-            </div>
-            <div class="legend-item">
-              <span class="legend-dot orange"></span>
-              Projeto 2 · Jogos & Criatividade
-            </div>
-          </div>
-        </div>
-
-        <div class="projects-grid">
-          <!-- PROJETO 1 -->
-          <article class="card-project project-1">
-            <div class="project-label">
-              <span class="tag">Projeto 1</span>
-              Campus Acessível (IA e Inclusão)
-            </div>
-            <h4 class="project-title">
-              Use IA para tornar o campus mais acessível para pessoas com deficiência visual
-            </h4>
-
-            <div class="project-chip-row">
-              <span class="chip blue">Google Teachable Machine</span>
-              <span class="chip blue">Visão Computacional</span>
-              <span class="chip">Aplicação Web</span>
-              <span class="chip">Guia Virtual</span>
-            </div>
-
-            <div class="project-section">
-              <p class="project-section-title">O Desafio</p>
-              <p class="project-section-body">
-                Como podemos usar a tecnologia para tornar nosso campus mais inclusivo para pessoas com deficiência visual?
-              </p>
-            </div>
-
-            <div class="project-section">
-              <p class="project-section-title">A Solução</p>
-              <p class="project-section-body">
-                Você vai ajudar a desenvolver uma aplicação web usando Inteligência Artificial e Visão Computacional. O sistema funcionará como um “guia virtual”: o celular reconhecerá o ambiente (biblioteca, laboratório, etc.) e falará o nome do local para o usuário.
-              </p>
-            </div>
-
-            <div class="project-section">
-              <p class="project-section-title">Por que se candidatar?</p>
-              <ul class="project-benefits">
-                <li>Aprenda na prática sobre Machine Learning e IA sem precisar de matemática complexa.</li>
-                <li>Desenvolva uma solução com impacto social direto e visível na vida das pessoas.</li>
-                <li>Trabalhe com tecnologias web modernas e boas práticas de desenvolvimento.</li>
-              </ul>
-            </div>
-          </article>
-
-          <!-- PROJETO 2 -->
-          <article class="card-project project-2">
-            <div class="project-label">
-              <span class="tag">Projeto 2</span>
-              Game Campi Conectados (Jogos e Criatividade)
-            </div>
-            <h4 class="project-title">
-              Crie um jogo 2D para receber calouros de forma divertida e gamificada
-            </h4>
-
-            <div class="project-chip-row">
-              <span class="chip orange">GDevelop</span>
-              <span class="chip orange">RPG / Aventura 2D</span>
-              <span class="chip">Onboarding de Calouros</span>
-              <span class="chip">Gamificação</span>
-            </div>
-
-            <div class="project-section">
-              <p class="project-section-title">O Desafio</p>
-              <p class="project-section-body">
-                Como podemos tornar a chegada dos novos alunos (calouros) mais divertida e menos confusa?
-              </p>
-            </div>
-
-            <div class="project-section">
-              <p class="project-section-title">A Solução</p>
-              <p class="project-section-body">
-                Vamos criar um jogo digital 2D (estilo RPG/Aventura) usando a engine GDevelop. O jogador explorará um campus virtual, cumprirá missões e aprenderá sobre a história, regras e locais importantes do instituto de forma gamificada.
-              </p>
-            </div>
-
-            <div class="project-section">
-              <p class="project-section-title">Por que se candidatar?</p>
-              <ul class="project-benefits">
-                <li>Aprenda o ciclo completo de desenvolvimento de jogos: roteiro, design de fases, arte e programação visual.</li>
-                <li>Use sua criatividade para resolver um problema real de comunicação com os calouros.</li>
-                <li>Crie um produto que poderá ser jogado por centenas de estudantes todos os anos.</li>
-              </ul>
-            </div>
-          </article>
-        </div>
-
-        <!-- CHAMADA FINAL -->
-        <section class="cta-final">
+        <div class="cta-final">
           <div class="cta-text">
-            <h3>Quem estamos procurando?</h3>
+            <h3>Objetivo do Projeto</h3>
             <p>
-              Não exigimos experiência prévia com IA ou criação de jogos. O mais importante é ter vontade de aprender, responsabilidade e disposição para colaborar em equipe.
+              A eficácia do RAG depende da qualidade da recuperação de informação, influenciada pela divisão dos documentos (chunking). Este estudo compara experimentalmente 3 estratégias principais em um corpus de domínio específico, avaliando com métricas padrão para gerar diretrizes práticas.
             </p>
             <div class="cta-pill-list">
-              <span class="cta-pill">Alunos curiosos</span>
-              <span class="cta-pill">Compromisso com prazos</span>
-              <span class="cta-pill">Trabalho em equipe</span>
-              <span class="cta-pill">Matrícula ativa no curso técnico</span>
+              <span class="cta-pill">LLMs & RAG</span>
+              <span class="cta-pill">Recuperação de Informação</span>
+              <span class="cta-pill">Chunking Strategies</span>
+              <span class="cta-pill">Métricas Quantitativas</span>
             </div>
           </div>
 
           <div class="cta-side">
-            <!-- SUBSTITUA O href PELO LINK DO SEU GOOGLE FORMS -->
             <a href="https://seu-link-do-forms-aqui" class="btn-primary">
               <span class="icon">★</span>
-              QUERO ME INSCREVER
+              QUERO PARTICIPAR
             </a>
             <p class="cta-deadline">
-              Inscrições: <strong>22/12/2025 a 30/01/2026</strong>
+              Inscrições abertas até: <strong>30/01/2026</strong>
             </p>
             <p class="cta-contact">
-              Dúvidas? Procure o <strong>Prof. Nelson</strong> ou envie um e-mail para:
-              <strong>nelsonjr@ifsp.edu.br</strong>
+              Contato: <strong>nelsonjr@ifsp.edu.br</strong>
             </p>
           </div>
         </section>
@@ -781,7 +471,7 @@
     </main>
 
     <footer>
-      Esta página foi pensada para leitura rápida em celular. Toque no botão “Quero me inscrever” para acessar o formulário de inscrição.
+      Projeto de Pesquisa em Inteligência Artificial e Processamento de Linguagem Natural | IFSP Campus Cubatão
     </footer>
   </div>
 </body>
